@@ -1,10 +1,10 @@
 package darts
 
 import (
-	"github.com/johnmcdnl/darts-api/resources"
+	"github.com/johnmcdnl/darts/resources"
 	"github.com/pressly/chi"
 	"github.com/pressly/chi/middleware"
-	"github.com/johnmcdnl/darts-api/auth"
+	"github.com/johnmcdnl/darts/auth"
 	"net/http"
 )
 

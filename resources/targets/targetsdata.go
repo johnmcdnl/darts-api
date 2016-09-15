@@ -1,7 +1,7 @@
 package targets
 
 import (
-	"github.com/johnmcdnl/darts-api/resources/data"
+	"github.com/johnmcdnl/darts/resources/data"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"sync"

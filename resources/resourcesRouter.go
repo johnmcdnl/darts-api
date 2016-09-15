@@ -2,7 +2,7 @@ package resources
 
 import (
 	"github.com/pressly/chi"
-	"github.com/johnmcdnl/darts-api/resources/targets"
+	"github.com/johnmcdnl/darts/resources/targets"
 	//"github.com/johnmcdnl/auth/auth"
 )
 
