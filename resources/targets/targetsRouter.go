@@ -37,35 +37,29 @@ func allTargetsHandler(w http.ResponseWriter, r *http.Request) {
 	targets, err := retrieveAllTargets()
 
 	if err != nil {
-		render.Status(r, http.StatusNotFound)
-		render.JSON(w, r, err.Error())
+		render.JSON(w, http.StatusNotFound, err.Error())
 		return
 	}
 
-	render.Status(r, http.StatusOK)
-	render.JSON(w, r, targets)
+	render.JSON(w, http.StatusOK, targets)
 }
 
 func usernameHandler(w http.ResponseWriter, r *http.Request) {
 	targets, err := retrieveAllTargetsByUsername(usernameParam(r))
 	if err != nil {
-		render.Status(r, http.StatusNotFound)
-		render.JSON(w, r, err.Error())
+		render.JSON(w, http.StatusNotFound, err.Error())
 		return
 	}
-	render.Status(r, http.StatusOK)
-	render.JSON(w, r, targets)
+	render.JSON(w, http.StatusOK, targets)
 }
 
 func targetNameHandler(w http.ResponseWriter, r *http.Request) {
 	targets, err := retrieveAllTargetsByTargetName(targetNameParam(r))
 	if err != nil {
-		render.Status(r, http.StatusNotFound)
-		render.JSON(w, r, err.Error())
+		render.JSON(w, http.StatusNotFound, err.Error())
 		return
 	}
-	render.Status(r, http.StatusOK)
-	render.JSON(w, r, targets)
+	render.JSON(w, http.StatusOK, targets)
 }
 
 func usernameTargetNameHandler(w http.ResponseWriter, r *http.Request) {
@@ -73,29 +67,24 @@ func usernameTargetNameHandler(w http.ResponseWriter, r *http.Request) {
 	targets, err := retrieveAllTargetsByUsernameAndTargetName(usernameParam(r), targetNameParam(r))
 
 	if err != nil {
-		render.Status(r, http.StatusNotFound)
-		render.JSON(w, r, err.Error())
+		render.JSON(w, http.StatusNotFound, err.Error())
 		return
 	}
 
-	render.Status(r, http.StatusOK)
-	render.JSON(w, r, targets)
+	render.JSON(w, http.StatusOK, targets)
 }
 
 func createTargetsMatch(w http.ResponseWriter, r *http.Request) {
 	t, err := bindTargetFromRequest(r)
 	if err != nil {
-		render.Status(r, http.StatusBadRequest)
-		render.JSON(w, r, err.Error())
+		render.JSON(w, http.StatusBadRequest, err.Error())
 		return
 	}
 
 	if t, err = createTarget(t); err != nil {
-		render.Status(r, http.StatusInternalServerError)
-		render.JSON(w, r, err.Error())
+		render.JSON(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	render.Status(r, http.StatusCreated)
-	render.JSON(w, r, t)
+	render.JSON(w, http.StatusCreated, t)
 }
