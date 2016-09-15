@@ -1,0 +1,13 @@
+version: '2'
+services:
+  api:
+    build: .
+    links:
+      - redis
+      - mongo
+    ports:
+      - "4500:4500"
+  redis:
+    image: redis
+  mongo:
+    image: mongo
