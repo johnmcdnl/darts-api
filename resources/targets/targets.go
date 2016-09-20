@@ -1,26 +1,24 @@
 package targets
 
 import (
-	"github.com/pressly/chi/render"
 	"errors"
+	"github.com/montanaflynn/stats"
+	"github.com/pressly/chi/render"
 	"net/http"
 	"time"
-	"github.com/montanaflynn/stats"
 )
 
-
-
 type Target struct {
-	Username   *string `json:",omitempty"`
-	TargetName *string `json:", omitempty"`
-	Attempts   *int64 `json:",omitempty"`
-	Success    *int64 `json:",omitempty"`
-	Percentage *float64 `json:",omitempty"`
+	Username   *string    `json:",omitempty"`
+	TargetName *string    `json:", omitempty"`
+	Attempts   *int64     `json:",omitempty"`
+	Success    *int64     `json:",omitempty"`
+	Percentage *float64   `json:",omitempty"`
 	Date       *time.Time `json:",omitempty"`
 }
 
 type Targets struct {
-	Targets []Target `json:",omitempty"`
+	Targets    []Target `json:",omitempty"`
 	Statistics `json:",omitempty"`
 }
 
@@ -30,7 +28,7 @@ type Statistics struct {
 	Median            float64 `json:",omitempty"`
 }
 
-func (t *Targets)generateTargetsAnalysis() (err error) {
+func (t *Targets) generateTargetsAnalysis() (err error) {
 	var percentages []float64
 	for _, target := range t.Targets {
 		percentages = append(percentages, *target.Percentage)
@@ -80,6 +78,3 @@ func bindTargetFromRequest(r *http.Request) (*Target, error) {
 
 	return t, nil
 }
-
-
-

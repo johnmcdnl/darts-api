@@ -1,17 +1,17 @@
 package integrationtest
 
 import (
-	"github.com/DATA-DOG/godog"
-	"github.com/DATA-DOG/godog/gherkin"
-	"github.com/johnmcdnl/darts-api/darts"
-	"github.com/johnmcdnl/auth/auth"
-	"github.com/satori/go.uuid"
-	"net/http"
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"errors"
+	"fmt"
+	"github.com/DATA-DOG/godog"
+	"github.com/DATA-DOG/godog/gherkin"
+	"github.com/johnmcdnl/auth/auth"
+	"github.com/johnmcdnl/darts-api/darts"
+	"github.com/satori/go.uuid"
 	"io/ioutil"
+	"net/http"
 )
 
 type targets struct {
@@ -19,12 +19,12 @@ type targets struct {
 	ResponseCode int
 }
 
-func (t *targets)theApplicationIsRunning() error {
+func (t *targets) theApplicationIsRunning() error {
 	go darts.StartServer()
 	return nil
 }
 
-func (t *targets)iHaveAValidUser() error {
+func (t *targets) iHaveAValidUser() error {
 
 	var u auth.User
 	u.Username = uuid.NewV4().String()
@@ -54,7 +54,7 @@ func (t *targets)iHaveAValidUser() error {
 	return nil
 }
 
-func (t *targets)iMakeARequestPOSTDartsapitargets(body *gherkin.DocString) error {
+func (t *targets) iMakeARequestPOSTDartsapitargets(body *gherkin.DocString) error {
 
 	req, _ := http.NewRequest(http.MethodPost, "http://localhost:4500/darts/api/targets", bytes.NewReader([]byte(body.Content)))
 	req.Header.Add("Authorization", fmt.Sprint("Bearer ", t.User.Password))
@@ -66,7 +66,7 @@ func (t *targets)iMakeARequestPOSTDartsapitargets(body *gherkin.DocString) error
 	return nil
 }
 
-func (t *targets)iGetAResponse(expectedCode int) error {
+func (t *targets) iGetAResponse(expectedCode int) error {
 	if t.ResponseCode != expectedCode {
 		return errors.New(fmt.Sprint("Expected: ", expectedCode, "\t", "Actual: ", t.ResponseCode))
 	}

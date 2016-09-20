@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"github.com/pressly/chi"
 	"github.com/johnmcdnl/auth/auth"
 	"github.com/johnmcdnl/darts/utils/handlers"
+	"github.com/pressly/chi"
 )
 
 func AuthRouter() chi.Router {
